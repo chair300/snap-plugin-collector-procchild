@@ -24,12 +24,11 @@ import (
 	"github.com/intelsdi-x/snap/core"
 	"github.com/intelsdi-x/snap/core/ctypes"
 	"github.com/chair300/procfs"
-
 	log "github.com/Sirupsen/logrus"
 )
 
 const (
-	vendor        = "UWMADISON"
+	vendor        = "Great Lakes SAN"
 	fs            = "procfs"
 	pluginName    = "childproc"
 	pluginType    = plugin.CollectorPluginType
@@ -42,22 +41,14 @@ func Meta() *plugin.PluginMeta {
 }
 
 // New returns a procstat plugin
-func New() *Procstat {
+func New() *childproc {
 	s := make(map[int32]Process)
-	procstat := &Procstat{stats: s}
-	return procstat
+	proc := &Process{}
+	return proc
 }
 
-// Procstat defines procstat type
-type Procstat struct {
-	initialized bool
-	rules       []Pid
-	stats       map[int32]Process
-	procstat    map[int32]Process
 
-}
-
-func (p *Procstat) init(cfg map[string]ctypes.ConfigValue) error {
+func (p *Process) init(cfg map[string]ctypes.ConfigValue) error {
 	if filesVal, ok := cfg["files"]; ok {
 		files := strings.Split(filesVal.(ctypes.ConfigValueStr).Value, ",")
 		for _, file := range files {

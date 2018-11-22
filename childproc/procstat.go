@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	vendor        = "Porto"
+	vendor        = "glsan"
 	fs            = "childproc"
 	pluginName    = "childproc"
 	pluginType    = plugin.CollectorPluginType
